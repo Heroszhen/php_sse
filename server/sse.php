@@ -19,7 +19,7 @@ $result = ConnectMysql::execRequete($req,[
     "time2" => $time2->format("y-m-d H:i:s")
 ]);
 $result = $result->fetchAll();
-echo "data: ".json_encode($result)."\n\n";
+if(count($result) > 0)echo "data: ".json_encode($result)."\n\n";
 
 //Flush buffer (force sending data to client)
 //flush();
