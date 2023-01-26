@@ -1,5 +1,5 @@
 <?php
-require_once "session.php";
+require_once "cors.php";
 //Set file mime type event-stream
 header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
@@ -14,7 +14,7 @@ $time1 = (new DateTime())->modify("+1 hour");
 $time2 = (new DateTime())->modify("+1 hour")->modify("-5 second");
 
 $req = "select * from message where created >= :time2 and created <= :time1";
-$result = execRequete($req,[
+$result = ConnectMysql::execRequete($req,[
     "time1" => $time1->format("y-m-d H:i:s"),
     "time2" => $time2->format("y-m-d H:i:s")
 ]);

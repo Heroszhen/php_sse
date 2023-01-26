@@ -21,4 +21,21 @@ class ConnectMysql{
 
         return $pdo;
     }
+
+    public static function execRequete(string $req, array $params = []){
+        // Sanitize
+        if ( !empty($params)){
+            foreach($params as $key => $value){
+                $params[$key] = trim(strip_tags($value));
+            }
+        }
+    
+        $r = self::getPDO()->prepare($req);
+        $r->execute($params);
+        if( !empty($r->errorInfo()[2]) ){
+            die('Erreur rencontrée lors de la requête : '.$r->errorInfo()[2]);
+        }
+    
+        return $r;
+    }
 }
